@@ -35,7 +35,15 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $save_data = [
+            "title" => $request->title,
+            "body" => $request->body,
+            "user_id" => env('TEST_GLOVAL_VALUE2', 1),
+        ];
+
+        $created_post = BlogPost::create($save_data);
+
+        return redirect("/blog/{$created_post->id}");
     }
 
     /**
