@@ -14,7 +14,9 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return BlogPost::all();
+        //return BlogPost::all();
+        $blogPosts = BlogPost::all();
+        return view('blog.list', ['blogPosts' => $blogPosts]);
     }
 
     /**
@@ -38,7 +40,7 @@ class BlogPostController extends Controller
         $save_data = [
             "title" => $request->title,
             "body" => $request->body,
-            "user_id" => env('TEST_GLOVAL_VALUE2', 1),
+            "user_id" => env('TESTER_ID', 1),
         ];
 
         $created_post = BlogPost::create($save_data);
@@ -54,7 +56,8 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $blogPost)
     {
-        return $blogPost;
+//        return $blogPost;
+        return view('blog.show', ['blogPost' => $blogPost]);
     }
 
     /**
@@ -63,9 +66,10 @@ class BlogPostController extends Controller
      * @param  \App\Models\BlogPost  $blogPost
      * @return \Illuminate\Http\Response
      */
-    public function edit(BlogPost $blogPost)
+    public function edit($blog_post_id)
     {
-        //
+        $blogPost = BlogPost::find($blog_post_id);
+        return view('blog.edit', ['blogPost' => $blogPost]);
     }
 
     /**
@@ -77,7 +81,15 @@ class BlogPostController extends Controller
      */
     public function update(Request $request, BlogPost $blogPost)
     {
-        //
+        $save_data = [
+            "title" => $request->title,
+            "body" => $request->body,
+            "user_id" => env('TESTER_ID', 1),
+        ];
+
+        $blogPost->update($save_data);
+
+        return redirect("/blog/{$blogPost->id}");
     }
 
     /**
@@ -88,6 +100,13 @@ class BlogPostController extends Controller
      */
     public function destroy(BlogPost $blogPost)
     {
-        //
+        $blogPost->delete();
+        return redirect("/blog");
     }
+    public function delete($blog_post_id)
+    {
+        BlogPost::destroy($blog_post_id);
+        return redirect("/blog");
+    }
+
 }

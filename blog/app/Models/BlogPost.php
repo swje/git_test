@@ -15,4 +15,8 @@ class BlogPost extends Model
         'user_id',
     ];
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
 }
