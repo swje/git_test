@@ -26,5 +26,8 @@ Route::get('/blog/edit/{blog_post_id}', [\App\Http\Controllers\BlogPostControlle
 Route::post('/blog/edit/{blogPost}', [\App\Http\Controllers\BlogPostController::class, "update"]);
 Route::get('/blog/delete/{blogPost}', [\App\Http\Controllers\BlogPostController::class, "destroy"]);
 Route::post('/blog/delete/{blog_post_id}', [\App\Http\Controllers\BlogPostController::class, "delete"]);
-
+# Comment
 Route::post('/comment', [\App\Http\Controllers\CommentController::class, "store"]);
+# Auth
+Route::get('/auth/regist', [\App\Http\Controllers\AuthController::class, "create"]);
+Route::post('/auth/regist', [\App\Http\Controllers\AuthController::class, "store"]);
