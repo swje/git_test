@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, "index"]);
+Route::get('/blog/list', [\App\Http\Controllers\BlogPostController::class, "index"]);
 Route::get('/blog/create', [\App\Http\Controllers\BlogPostController::class, "create"]);
 Route::post('/blog/create', [\App\Http\Controllers\BlogPostController::class, "store"]);
 Route::get('/blog/{blogPost}', [\App\Http\Controllers\BlogPostController::class, "show"]);
