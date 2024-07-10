@@ -8,6 +8,11 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
     public function store(Request $request){
+        $validated = $request->validate([
+            'blog_post_id' => 'required|integer|gt:0',
+            'body' => 'required|min:3|max:100',
+        ]);
+
         $save_data = [
             "blog_post_id" => $request->blog_post_id,
             "body" => $request->body,
