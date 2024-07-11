@@ -33,4 +33,12 @@ class AuthController extends Controller
             "message" => "The provided email or password doesn't match our records."
         ]);
     }
+
+    public function logout(Request $request){
+        syslog(LOG_INFO, "logout");
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/blog');
+    }
 }

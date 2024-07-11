@@ -15,5 +15,9 @@
         <li><p>게시글이 없습니다.</p></li>
     @endforelse
 </ul>
+<form method="get" action="/auth/logout">
+    <input type="submit" value="logout" />
+</form>
+
 </body>
 </html>

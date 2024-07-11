@@ -33,3 +33,5 @@ Route::get('/auth/regist', [\App\Http\Controllers\AuthController::class, "create
 Route::post('/auth/regist', [\App\Http\Controllers\AuthController::class, "store"]);
 Route::get('/auth/login', [\App\Http\Controllers\AuthController::class, "login"]);
 Route::post('/auth/login', [\App\Http\Controllers\AuthController::class, "login_store"]);
+Route::get('/auth/logout', [\App\Http\Controllers\AuthController::class, "logout"]);
+
