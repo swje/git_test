@@ -20,4 +20,17 @@ class AuthController extends Controller
     public function login(){
         return view('auth.login');
     }
+
+    public function login_store(Request $request){
+        $credentials = request(['email','password']);
+
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect("/blog");
+        }
+
+        return back()->withErrors([
+            "message" => "The provided email or password doesn't match our records."
+        ]);
+    }
 }
