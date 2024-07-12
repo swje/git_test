@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
@@ -26,6 +27,9 @@ class BlogPostController extends Controller
      */
     public function create()
     {
+        if(!Auth::check()){
+            return redirect("/blog");
+        }
         return view('blog.create');
     }
 
@@ -37,6 +41,9 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()){
+            return redirect("/blog");
+        }
         $save_data = [
             "title" => $request->title,
             "body" => $request->body,
@@ -68,7 +75,16 @@ class BlogPostController extends Controller
      */
     public function edit($blog_post_id)
     {
+        if(!Auth::check()){
+            return redirect("/blog");
+        }
+
         $blogPost = BlogPost::find($blog_post_id);
+
+        if(Auth::id() != $blogPost->user_id){
+            return redirect("/blog/{$blogPost->id}");
+        }
+
         return view('blog.edit', ['blogPost' => $blogPost]);
     }
 
@@ -81,6 +97,13 @@ class BlogPostController extends Controller
      */
     public function update(Request $request, BlogPost $blogPost)
     {
+        if(!Auth::check()){
+            return redirect("/blog");
+        }
+        if(Auth::id() != $blogPost->user_id){
+            return redirect("/blog/{$blogPost->id}");
+        }
+
         $save_data = [
             "title" => $request->title,
             "body" => $request->body,
@@ -100,6 +123,13 @@ class BlogPostController extends Controller
      */
     public function destroy(BlogPost $blogPost)
     {
+        if(!Auth::check()){
+            return redirect("/blog");
+        }
+        if(Auth::id() != $blogPost->user_id){
+            return redirect("/blog/{$blogPost->id}");
+        }
+
         $blogPost->delete();
         return redirect("/blog");
     }

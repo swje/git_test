@@ -43,8 +43,12 @@
                 "blog_post_id" : blog_post_id,
                 "body" : comment_body
             }).done(function(data){
-                alert("saved");
-                $("#comment_list").append('<li id="li_comment_'+data+'">'+comment_body+'</li>');
+                if(data.is_success){
+                    alert("saved");
+                    $("#comment_list").append('<li id="li_comment_'+data+'">'+comment_body+'</li>');
+                } else {
+                    alert(data.reason);
+                }
             }).fail(function (data){
                 alert("error");
             });
