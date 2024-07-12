@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect()->route('blog_list');
 });
 
-Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, "index"]);
+Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, "index"])->name('blog_list');
 Route::get('/blog/list', [\App\Http\Controllers\BlogPostController::class, "index"]);
 Route::get('/blog/create', [\App\Http\Controllers\BlogPostController::class, "create"]);
 Route::post('/blog/create', [\App\Http\Controllers\BlogPostController::class, "store"]);
