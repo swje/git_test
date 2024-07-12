@@ -47,7 +47,8 @@ class BlogPostController extends Controller
         $save_data = [
             "title" => $request->title,
             "body" => $request->body,
-            "user_id" => env('TESTER_ID', 1),
+            //"user_id" => env('TESTER_ID', 1),
+            "user_id" => Auth::id(),
         ];
 
         $created_post = BlogPost::create($save_data);
@@ -107,7 +108,8 @@ class BlogPostController extends Controller
         $save_data = [
             "title" => $request->title,
             "body" => $request->body,
-            "user_id" => env('TESTER_ID', 1),
+            //"user_id" => env('TESTER_ID', 1),
+            "user_id" => Auth::id(),
         ];
 
         $blogPost->update($save_data);

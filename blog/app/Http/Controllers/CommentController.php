@@ -24,7 +24,8 @@ class CommentController extends Controller
         $save_data = [
             "blog_post_id" => $request->blog_post_id,
             "body" => $request->body,
-            "user_id" => env("TESTER_ID",1)
+            //"user_id" => env("TESTER_ID",1),
+            "user_id" => Auth::id()
         ];
 
         $created_comment = Comment::create($save_data);
