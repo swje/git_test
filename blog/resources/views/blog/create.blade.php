@@ -1,34 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel_test</title>
-</head>
-<body class="antialiased">
+@extends('layouts.app')
+@section('content')
+    <!-- content (s) -->
 
-<form method="post">
-    @csrf
-    <div class="grid grid-cols-2 md:grid-cols-1">
-        <div class="p-6">
-            <div class="ml-12">
-                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                    <label>title</label><br/>
-                    <input type="text" name="title"/>
-                </div>
+
+    <div>
+    <form method="post">
+        @csrf
+        <div class="row">
+            <div class="col-12 control-group">
+                <label>title</label><br/>
+                <input type="text" name="title" class="form-control" placeholder="제목" required/>
+            </div>
+            <div class="col-12 control-group">
+                <label>body</label><br/>
+                <textarea name="body" class="form-control" placeholder="본문 입력" required></textarea>
             </div>
         </div>
-        <div class="p-6">
-            <div class="ml-12">
-                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                    <label>body</label><br/>
-                    <textarea name="body"></textarea>
-                </div>
-            </div>
-        </div>
-        <input type="submit" value="저장"/>
+        <input type="submit" value="저장" class="btn btn-primary"/>
+    </form>
     </div>
-</form>
 
-</body>
-</html>
+
+    <a href="/blog" class="btn btn-secondary">목록</a>
+
+    <!-- content (e) -->
+@endsection
